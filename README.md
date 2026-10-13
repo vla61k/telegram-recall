@@ -10,14 +10,14 @@ What if you could search for messages using the reactions they received?
 
 Instead of trying to remember the exact words of a joke, you could simply search for messages with 😂 reactions and rediscover the moments that made everyone laugh.
 
-<img src="docs/assets/reactions_search.gif" width="300">
+<img src="docs/assets/reactions_search.gif" width="600">
 
 #### Search by Stickers
 
 In my group chats, certain stickers have become inside jokes. We send them in specific situations, and sometimes just seeing one brings back an entire conversation.
 
 
-<img src="docs/assets/stickers_search.gif" width="300">
+<img src="docs/assets/stickers_search.gif" width="600">
 
 
 It's a simple way to rediscover the stories behind your favorite stickers.
@@ -26,7 +26,7 @@ It's a simple way to rediscover the stories behind your favorite stickers.
 
 Maybe your friends planned something important together. Maybe someone said something you'll want to remember. Or maybe a whole exchange was just too funny to lose.
 
-<img src="docs/assets/fragment_search.gif" width="300">
+<img src="docs/assets/fragment_search.gif" width="600">
 
 You can give a Fragment a name, keep it alongside other saved moments, and return to the original messages whenever you want.
 
@@ -35,7 +35,7 @@ You can give a Fragment a name, keep it alongside other saved moments, and retur
 The idea for this feature actually came from a funny experiment with my friends. One day, a friend of mine uploaded our entire group chat history into Google's NotebookLM. We started asking it all kinds of ridiculous questions about ourselves.
 
 
-<img src="docs/assets/aisearch.gif" width="300">
+<img src="docs/assets/aisearch.gif" width="600">
 
 
 _Where would each of us fall on the political compass?_
