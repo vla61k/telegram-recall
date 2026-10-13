@@ -53,3 +53,5 @@ AI analysis requires computing resources, so I also imagined integrating it with
 **I wanted to show not just how these features could look, but how they could actually feel to use inside Telegram.**
 
 **I'd love to hear what you think!**
+
+_Telegram Recall is an independent concept created by me, with the interactive prototype developed using OpenAI Codex. This is an unofficial concept and is not affiliated with Telegram._
