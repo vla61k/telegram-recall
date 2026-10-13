@@ -1,0 +1,8 @@
+node_modules
+.npm-cache
+dist
+stickers
+public/stickers
+test-results
+package-lock.json
+.openai

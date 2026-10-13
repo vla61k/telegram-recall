@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.npm-cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Build
+dist/
+
+# Local files
+.openai/
+test-results/
+playwright-report/
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
