@@ -1,84 +1,55 @@
 # Telegram Recall
 
-An interactive, independent Telegram iOS design exploration. Search reactions, rediscover stickers, save conversation Fragments, and ask questions with verifiable message sources.
+**A concept prototype for smarter chat search, featuring reaction and sticker search, saved conversation fragments, and AI-powered chat insights.**
 
-All demo conversations are fictional. This project is not affiliated with Telegram.
+My chats are full of little moments worth remembering: funny messages, ridiculous jokes, unexpected replies, and sometimes more emotional conversations. We react to these messages with emojis, send stickers, laugh about them, and then move on. Over time, even the most memorable moments get buried under thousands of newer messages. Sometimes I want to revisit something that made us all laugh. Other times, I want to find a conversation that meant a lot to me. But there's a problem: I don't always remember what was said. I remember how we reacted to it. **That's where the idea for Telegram Recall started.**
 
-## Run
+## Search by Reactions
 
-Requires Node.js 22+ and npm.
+What if you could search for messages using the reactions they received?
 
-```sh
-npm ci
-npm run dev
-```
+Instead of trying to remember the exact words of a joke, you could simply search for messages with 😂 reactions and rediscover the moments that made everyone laugh.
 
-Open **http://127.0.0.1:5173**. The optional API runs on port 3001.
+<img src="docs/assets/reactions_search.gif" width="600">
 
-```sh
-npm test
-npm run build
-npm start
-```
+## Search by Stickers
 
-The production server serves the built app and API at **http://127.0.0.1:3001**.
+In my group chats, certain stickers have become inside jokes. We send them in specific situations, and sometimes just seeing one brings back an entire conversation.
 
-## Try the concept
 
-1. Open **The Group Chat**.
-2. Choose **Reactions**, select 😂, choose **Most reacted**, and open a result. It scrolls to the real message and highlights it; **Back to results** restores the filters.
-3. Choose **Stickers** and select one of the three supplied WebP assets. Filter by emoji, keyword, pack or sender. Each occurrence includes context, with usage statistics above.
-4. Right-click a message (or hold on touch) → **Save Fragment**. Select another message to include the consecutive range, then give it a title. Fragments appear in the chat's **Info → Saved** tab.
-5. Open **Ask AI** and try “How did the frog joke start?” or “Which sticker do we use the most?”. Open a source and return to the answer.
-6. Open **Settings** for appearance, AI mode, dataset counts, and a confirmed reset.
+<img src="docs/assets/stickers_search.gif" width="600">
 
-Contacts and Calls are intentionally disabled; they are present only to retain the Telegram tab-bar structure.
 
-## AI modes
+It's a simple way to rediscover the stories behind your favorite stickers.
 
-**Local evidence** works completely in the browser without credentials. It uses the shared retrieval pipeline, quotes actual messages, computes sticker statistics, and explicitly identifies itself as a local evidence summary. It does not impersonate a language model. Text is progressively revealed for the interactive experience.
+## Fragments
 
-**Connected AI** uses an OpenAI-compatible chat-completions streaming endpoint. Copy .env.example to .env, set OPENAI_API_KEY, OPENAI_BASE_URL, and OPENAI_MODEL, then restart the server. Choose Connected AI in Settings. Credentials never enter the browser. Live provider behavior requires a key and is not included in the static hosted demo.
+Maybe your friends planned something important together. Maybe someone said something you'll want to remember. Or maybe a whole exchange was just too funny to lose.
 
-The server retrieves up to 32 messages using BM25-style lexical relevance, query normalization, a small synonym dictionary, storyline metadata, varied dates, neighboring messages and reply relationships. Sticker metadata and aggregate statistics are included. It does not send the entire history. Conversation content is explicitly untrusted. Provider citation IDs are validated against the retrieved set; invalid references never become links. An answer without a valid source is replaced by an uncertainty message.
+<img src="docs/assets/fragment_search.gif" width="600">
 
-Connected AI analyzes the original seed dataset. Browser-added messages participate in local search and Local evidence, and are not silently uploaded. Generation supports cancellation, a 60-second timeout, errors, retry and copying.
+You can give a Fragment a name, keep it alongside other saved moments, and return to the original messages whenever you want.
 
-## Dataset and persistence
+## Your Chat Has Stories to Tell
 
-- 10 conversations; 2,091 messages.
-- 1,227 messages and 7 people in The Group Chat.
-- More than 300 reacted messages; 136 sticker messages.
-- 15 storylines, each with a beginning and later callbacks.
-- 18 initial Fragments.
-- Three original supplied WebP stickers in stickers/, served from public/stickers/.
+The idea for this feature actually came from a funny experiment with my friends. One day, a friend of mine uploaded our entire group chat history into Google's NotebookLM. We started asking it all kinds of ridiculous questions about ourselves.
 
-Stories are hand-authored fictional scenes with deterministic ambient conversation generation. Stable message IDs are shared by client and server. Fragments store ordered message references, original-chat ID, title, description, category, creation time and participants. Original dates are resolved through message references.
 
-IndexedDB stores locally added messages and Fragments. Appearance and AI mode use localStorage. There is no multi-user synchronization or Telegram login. Reset restores the seed and requires confirmation.
+<img src="docs/assets/aisearch.gif" width="600">
 
-## Architecture
 
-```text
-src/             React app, iOS-style responsive CSS, IndexedDB storage
-shared/data.ts   Fictional conversation generator and sticker catalog
-shared/search.ts Filters, retrieval, local evidence, citation validation
-shared/types.ts  Shared TypeScript data contracts
-server/index.ts  Express API, streaming provider adapter, production server
-tests/           Dataset, search, retrieval and citation integrity tests
-public/          Original supplied stickers
-```
+_Where would each of us fall on the political compass?_
 
-React Router uses hash routes so the app can be hosted on a static server without rewrite rules. The desktop layout presents a two-pane messenger; narrow screens use single-screen iOS navigation. Both day and night themes work.
+_Which character from The Boys would each of us be?_
 
-## Deployment and GitHub
+But AI could be useful for more than just having fun.
 
-The build produces dist/, which can be deployed to static hosting. All core demo features and Local evidence work on static hosting. To enable Connected AI, deploy the Node server and set server-side environment variables. Put a publicly reachable AI API behind authentication and request limits before enabling paid credentials; the included server binds to localhost by default.
+*What has my girlfriend been wanting as a gift for ages?*
 
-Source files and a lockfile are ready for a GitHub repository. Secrets, dependencies, build output, caches and test artifacts are ignored. No GitHub repository is automatically created. The supplied sticker artwork remains the property of its respective authors; do not assume the code grants redistribution rights to those assets.
+What made it so entertaining was that the AI wasn't just making up random personality descriptions. It had our conversations as context. What if we could do all of this directly inside Telegram?
 
-## Validation and limits
+AI analysis requires computing resources, so I also imagined integrating it with Telegram Stars.
 
-Run npm test for dataset scale, reference integrity, composable reaction/sticker filtering, statistics, retrieval scope/context and invalid-citation rejection. Run npm run build for strict TypeScript checks and production compilation.
+**I wanted to show not just how these features could look, but how they could actually feel to use inside Telegram.**
 
-This is a proposal, not a Telegram client. Stars are a labeled concept; there is no billing. The three provided stickers are static WebP files. Avatars use local emoji artwork. The requested reference screenshot was not supplied, so the design uses established iOS Telegram patterns rather than a pixel comparison with that screenshot. Supplemental chats and everyday background activity use reusable conversation templates.
+**I'd love to hear what you think!**
